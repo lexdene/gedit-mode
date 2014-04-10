@@ -21,9 +21,27 @@
     (forward-line -1)
     (current-indentation)))
 
+(defun gedit-unindent-command ()
+  "unindent current line"
+  (interactive)
+  (let (
+        (current-indent (current-indentation)))
+    (delete-horizontal-space)
+    (indent-to (- current-indent tab-width))))
+
+(defvar gedit-mode-map
+  (let ((map (make-sparse-keymap)))
+    ;; key bindings
+    (define-key map (kbd "<backtab>") 'gedit-unindent-command)
+    map)
+  "Keymap for gedit mode.")
+
 (define-minor-mode gedit-mode
   "a mode for gedit user"
   :global t :group 'gedit
-  (set (make-local-variable 'indent-line-function) 'gedit-indent-line))
+  (if gedit-mode
+    ; set if mode is enable
+    (use-local-map gedit-mode-map)
+    (set (make-local-variable 'indent-line-function) 'gedit-indent-line)))
 
 (provide 'gedit-mode)
