@@ -18,7 +18,10 @@
 (defun previous-line-indentation ()
   "calculate the indentation of previous line"
   (save-excursion
-    (forward-line -1)
+    (while
+      (and
+        (eq 0 (forward-line -1))
+        (eq 0 (current-indentation))))
     (current-indentation)))
 
 (defun gedit-unindent-command ()
