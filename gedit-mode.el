@@ -43,8 +43,16 @@
   "a mode for gedit user"
   :global t :group 'gedit
   (if gedit-mode
-    ; set if mode is enable
-    (use-local-map gedit-mode-map)
-    (set (make-local-variable 'indent-line-function) 'gedit-indent-line)))
+    (progn
+      (use-local-map gedit-mode-map)
+      (setq indent-line-function 'gedit-indent-line))))
+
+(defun gedit-mode-maybe ()
+  "enable gedit-mode"
+  (gedit-mode t))
+
+(define-global-minor-mode global-gedit-mode
+  gedit-mode gedit-mode-maybe
+  :group 'gedit)
 
 (provide 'gedit-mode)
