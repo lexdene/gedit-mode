@@ -20,9 +20,18 @@
   (save-excursion
     (while
       (and
+        ; zero means forward success
         (eq 0 (forward-line -1))
-        (eq 0 (current-indentation))))
+        (current-line-blank-p)))
     (current-indentation)))
+
+(defun current-line-blank-p ()
+  "is current line blank ?"
+  (string-match "^[ \t]*$"
+    ; thing-at-point will return an additional newline character
+    (substring
+      (thing-at-point 'line)
+      0 -1)))
 
 (defun gedit-unindent-command ()
   "unindent current line"
