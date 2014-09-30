@@ -2,7 +2,9 @@
 (defun gedit-indent-line ()
   "indent current line as gedit mode"
   (interactive)
-  (indent-to (gedit-calculate-indent)))
+  (if (< (current-column) (current-indentation))
+    (move-to-column (current-indentation))
+    (indent-to (gedit-calculate-indent))))
 
 (defun gedit-calculate-indent ()
   "calculate the indent column"
@@ -54,7 +56,7 @@
   (if gedit-mode
     (progn
       (use-local-map gedit-mode-map)
-      (setq indent-line-function 'gedit-indent-line))))
+      (set (make-local-variable 'indent-line-function) #'gedit-indent-line))))
 
 (defun gedit-mode-maybe ()
   "enable gedit-mode"
