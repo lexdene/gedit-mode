@@ -47,7 +47,6 @@
   (let ((map (make-sparse-keymap)))
     ;; key bindings
     (define-key map (kbd "<backtab>") 'gedit-unindent-command)
-    (define-key map "\t" 'indent-rigidly)
     map)
   "Keymap for gedit mode.")
 
