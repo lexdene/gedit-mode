@@ -3,8 +3,8 @@
   "indent current line as gedit mode"
   (interactive)
   (if (< (current-column) (current-indentation))
-    (move-to-column (current-indentation))
-    (indent-to (gedit-calculate-indent))))
+    (move-to-column (current-indentation)))
+  (indent-to (gedit-calculate-indent)))
 
 (defun gedit-calculate-indent ()
   "calculate the indent column"
