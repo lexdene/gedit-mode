@@ -53,9 +53,9 @@
 (define-minor-mode gedit-mode
   "a mode for gedit user"
   :global t :group 'gedit
+  :keymap (gedit-mode-map)
   (if gedit-mode
     (progn
-      (use-local-map gedit-mode-map)
       (set (make-local-variable 'indent-line-function) #'gedit-indent-line))))
 
 (defun gedit-mode-maybe ()
