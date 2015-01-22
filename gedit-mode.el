@@ -59,9 +59,16 @@
     (progn
       (set (make-local-variable 'indent-line-function) #'gedit-indent-line))))
 
+(defvar gedit-mode-enable-mode-list
+  '(
+    python-mode
+    coffee-mode
+    ))
+
 (defun gedit-mode-maybe ()
   "enable gedit-mode"
-  (gedit-mode t))
+  (if (member major-mode gedit-mode-enable-mode-list)
+    (gedit-mode t)))
 
 (define-global-minor-mode global-gedit-mode
   gedit-mode gedit-mode-maybe
